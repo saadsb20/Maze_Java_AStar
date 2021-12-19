@@ -59,7 +59,7 @@ public class LevelFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //do level1
                 dispose();
-                new PartieGUI(21,21, 60);
+                new PartieGUI(21,21, 60, 5, 5);
             }
         });
         btnNewButton.setBounds(0, 0, 90, 70);
@@ -70,7 +70,7 @@ public class LevelFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //do level2
                 dispose();
-                new PartieGUI(41,41, 90);
+                new PartieGUI(41,41, 90, 7, 7);
             }
         });
         btnNiveau.setBounds(94, 0, 90, 70);
@@ -81,7 +81,7 @@ public class LevelFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //do level3
                 dispose();
-                new PartieGUI(61,61, 120);
+                new PartieGUI(61,61, 120, 10, 10);
 
             }
         });
@@ -93,7 +93,7 @@ public class LevelFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //do level4
                 dispose();
-                new PartieGUI(81,81, 150);
+                new PartieGUI(81,81, 150, 15, 15);
             }
         });
         btnNiveau_2.setBounds(284, 0, 90, 70);

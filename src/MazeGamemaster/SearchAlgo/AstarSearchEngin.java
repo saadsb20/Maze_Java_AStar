@@ -4,6 +4,9 @@ package MazeGamemaster.SearchAlgo;/*
  * and open the template in the editor.
  */
 
+import MazeGamemaster.Entity.Agent;
+import MazeGamemaster.Entity.Maze;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -13,12 +16,12 @@ import java.util.PriorityQueue;
  * @author YOU ET-TOUIL
  */
 public class AstarSearchEngin extends AbstractSearchEngine {
- ArrayList<Dimension> L= new ArrayList<Dimension>(), T=new ArrayList<Dimension>();
+    ArrayList<Dimension> L= new ArrayList<Dimension>(), T=new ArrayList<Dimension>();
     PriorityQueue<Dimension> file = new PriorityQueue<Dimension>();
     Dimension predecessor[][];  
         
-    public AstarSearchEngin(int width, int height) {
-        super(width, height);
+    public AstarSearchEngin(int width, int height, int nbrBonus, int nbrObstacle) {
+        super(width, height, nbrBonus, nbrObstacle);
         
         predecessor = new Dimension[width][height];  
         for (int i=0; i<width; i++) 
@@ -74,6 +77,16 @@ public class AstarSearchEngin extends AbstractSearchEngine {
             }
         }
         
+    }
+
+    public Maze getUpdatedMaze(Agent p){
+        for (Dimension d: Agent.getBonusVisited()) {
+            maze.setValue(d.width, d.height, (short) 0);
+        }
+        for (Dimension d: Agent.getObstacleVisited()) {
+            maze.setValue(d.width, d.height, (short) 0);
+        }
+        return this.maze;
     }
 }
 

@@ -25,13 +25,11 @@ public class MazesPanel extends JPanel{
 
     private boolean displayPath = false;
     private JPanel jPanel1 = new JPanel();
-    public MazesPanel(int height, int width){
+    public MazesPanel(int height, int width, int timeInSeconds, int nbrBonus, int nbrObstacle){
         playerMove();
         PaintPanel();
-
-        currentSearchEngine = new AstarSearchEngin(height, width);
-
-
+        this.player = new Agent(timeInSeconds);
+        currentSearchEngine = new AstarSearchEngin(height, width, nbrBonus, nbrObstacle);
     }
 
     private void PaintPanel() {
@@ -48,11 +46,13 @@ public class MazesPanel extends JPanel{
         super.paintComponent(g);
 
         if (currentSearchEngine == null) return ;
-        Maze maze = currentSearchEngine.getMaze();
+        Maze maze = currentSearchEngine.getUpdatedMaze(player);
         int width = maze.getWidth();
         int height = maze.getHeight();
+        int nbrBonus = maze.getNbrBonus();
+        int nbrObstacle = maze.getNbrObstacle();
         //update Chemin
-        currentSearchEngine = new AstarSearchEngin(height,width);
+        currentSearchEngine = new AstarSearchEngin(height,width, nbrBonus, nbrObstacle);
 
         int n2=width;
         int n=width+10;
@@ -75,8 +75,8 @@ public class MazesPanel extends JPanel{
                 break;
         }
 
-        System.out.println("Size of current maze: " + width + " by " + height);
-        maze.afficherConsole();
+//        System.out.println("Size of current maze: " + width + " by " + height);
+//        maze.afficherConsole();
         Graphics g1 = this.contentPane.getGraphics();
         BufferedImage image = new BufferedImage(n2+18, n2+18, BufferedImage.TYPE_INT_RGB);
         Graphics g2 = image.getGraphics();

@@ -3,6 +3,7 @@ package MazeGamemaster.Entity;
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
@@ -17,61 +18,88 @@ public class Agent implements Runnable {
 	private int timeReserved;
 	private static int money = 0;
 	public static Dimension startLoc = new Dimension();
-	private Maze maze;
+	private static ArrayList<Dimension> bonusVisited;
+	private static ArrayList<Dimension> obstacleVisited;
 
 	public Agent(int timeReserved){
 		this.timeReserved = timeReserved;
 		this.startTime = LocalDateTime.now();
+		bonusVisited = new ArrayList<Dimension>();
+		obstacleVisited = new ArrayList<Dimension>();
 	}
 
     public static void moveLeft(Maze maze){
 		if((maze.getValue(startLoc.width-1, startLoc.height) != -1)){
 			maze.setValue(startLoc.width, startLoc.height, (short) 0);
 			if(maze.getValue(startLoc.width-=1, startLoc.height) == (short)-3 ) endGame();
-			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 5)money++;
-			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 6)money--;
+			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 5){
+				bonusVisited.add(new Dimension(startLoc.width, startLoc.height));
+				money++;
+			}
+			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 6){
+				obstacleVisited.add(new Dimension(startLoc.width, startLoc.height));
+				money--;
+			}
 			else maze.setValue(startLoc.width, startLoc.height, (short)-2);
 		}
 		else maze.setValue(startLoc.width, startLoc.height, (short)-2);
-		System.out.println("You got " + money);
+		System.out.println(bonusVisited.toString() + "      " + obstacleVisited.toString());
 	}
 
 	public static void moveRight(Maze maze){
 		if((maze.getValue(startLoc.width+1, startLoc.height) != -1) ){
 			maze.setValue(startLoc.width, startLoc.height, (short) 0);
 			if(maze.getValue(startLoc.width+=1, startLoc.height) == (short)-3 ) endGame();
-			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 5)money++;
-			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 6)money--;
+			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 5){
+				bonusVisited.add(new Dimension(startLoc.width, startLoc.height));
+				money++;
+			}
+			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 6){
+				obstacleVisited.add(new Dimension(startLoc.width, startLoc.height));
+				money--;
+			}
 			else maze.setValue(startLoc.width, startLoc.height, (short)-2);
 		}
 		else maze.setValue(startLoc.width, startLoc.height, (short)-2);
-		System.out.println("You got " + money);
+		System.out.println(bonusVisited.toString() + "      " + obstacleVisited.toString());
 	}
 
 	public static void moveDown(Maze maze){
 		if((maze.getValue(startLoc.width, startLoc.height+1) != -1) ){
 			maze.setValue(startLoc.width, startLoc.height, (short) 0);
 			if(maze.getValue(startLoc.width, startLoc.height+=1) == (short)-3 ) endGame();
-			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 5)money++;
-			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 6)money--;
+			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 5){
+				bonusVisited.add(new Dimension(startLoc.width, startLoc.height));
+				money++;
+			}
+			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 6){
+				obstacleVisited.add(new Dimension(startLoc.width, startLoc.height));
+				money--;
+			}
 			else maze.setValue(startLoc.width, startLoc.height, (short)-2);
 		}
 		else maze.setValue(startLoc.width, startLoc.height, (short)-2);
-		System.out.println("You got " + money);
+		System.out.println(bonusVisited.toString() + "      " + obstacleVisited.toString());
 	}
 
 	public static void moveUp(Maze maze){
 		if((maze.getValue(startLoc.width, startLoc.height-1) != -1) ){
 			maze.setValue(startLoc.width, startLoc.height, (short) 0);
 			if(maze.getValue(startLoc.width, startLoc.height-=1) == (short)-3 ) endGame();
-			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 5)money++;
-			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 6)money--;
+			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 5){
+				bonusVisited.add(new Dimension(startLoc.width, startLoc.height));
+				money++;
+			}
+			else if(maze.getValue(startLoc.width, startLoc.height) == (short) 6){
+				obstacleVisited.add(new Dimension(startLoc.width, startLoc.height));
+				money--;
+			}
 			else maze.setValue(startLoc.width, startLoc.height, (short)-2);
 			maze.setValue(1,1,(short)0);
 		}
 		else maze.setValue(startLoc.width, startLoc.height, (short)-2);
 		maze.setValue(1,1,(short)0);
-		System.out.println("You got " + money);
+		System.out.println(bonusVisited.toString() + "      " + obstacleVisited.toString());
 	}
 
 	public static void endGame(){
@@ -117,5 +145,13 @@ public class Agent implements Runnable {
 
 		Long seconds = TimeUnit.SECONDS.toSeconds(uptime);
 		return (hours < 9 ? "0" : "") + hours + ":" + (minutes < 9 ? "0" : "") + minutes + ":" + (seconds < 9 ? "0" : "") + seconds;
+	}
+
+	public static ArrayList<Dimension> getBonusVisited() {
+		return bonusVisited;
+	}
+
+	public static ArrayList<Dimension> getObstacleVisited() {
+		return obstacleVisited;
 	}
 }
