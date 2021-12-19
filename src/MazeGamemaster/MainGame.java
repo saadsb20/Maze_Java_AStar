@@ -1,12 +1,14 @@
 package MazeGamemaster;
 
 import MazeGamemaster.GUI.LevelFrame;
+import MazeGamemaster.GUI.PartieGUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class MainGame extends JFrame {
 
@@ -78,6 +80,7 @@ public class MainGame extends JFrame {
      */
     public MainGame() {
 
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -96,20 +99,18 @@ public class MainGame extends JFrame {
         panel_1.setLayout(null);
 
         JButton btnNewButton = new JButton("Nouvelle Partie");
-        btnNewButton.setBounds(124, 59, 118, 23);
+        btnNewButton.setBounds(124, 60, 118, 25);
         panel_1.add(btnNewButton);
 
-        JButton btnOption = new JButton("Option2\r\n");
-        btnOption.setBounds(124, 97, 118, 23);
-        panel_1.add(btnOption);
 
-        JButton btnOption_1 = new JButton("Option3");
-        btnOption_1.setBounds(124, 131, 118, 23);
-        panel_1.add(btnOption_1);
+        JButton btnNewButton2 = new JButton(" Charger une Partie");
+        btnNewButton2.setBounds(124, 105, 118, 25);
+        panel_1.add(btnNewButton2);
 
-        JButton btnOption_2 = new JButton("Option4");
-        btnOption_2.setBounds(124, 165, 118, 23);
-        panel_1.add(btnOption_2);
+        JButton btnNewButton3 = new JButton("Quitter");
+        btnNewButton3.setBounds(124, 150, 118, 25);
+        panel_1.add(btnNewButton3);
+
 
         JLabel lblNewLabel = new JLabel("!! MazeGame !!");
         lblNewLabel.setFont(new Font("Andalus", Font.BOLD, 18));
@@ -118,11 +119,29 @@ public class MainGame extends JFrame {
 
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               dispose();
-               new LevelFrame();
+                dispose();
+                new LevelFrame();
+            }
+        });
+
+        btnNewButton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new PartieGUI(21,21,60,5,5);
+            }
+        });
+        btnNewButton3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                close();
+                dispose();
             }
         });
         this.setVisible(true);
 
+    }
+
+    public void close() {
+        WindowEvent winClosingEvent = new WindowEvent( this, WindowEvent.WINDOW_CLOSING );
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent( winClosingEvent );
     }
 }

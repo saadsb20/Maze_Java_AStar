@@ -125,7 +125,7 @@ public class Agent implements Runnable {
 	@Override
 	public void run() {
 		while (true){
-
+			System.out.println(this.getCountDown());
 			this.getCountDown();
 			if (LocalDateTime.now().isAfter(this.startTime.plusSeconds(this.timeReserved))){
 				endGame();
@@ -137,14 +137,18 @@ public class Agent implements Runnable {
 	public String getCountDown(){
 		Long uptime  = SECONDS.between(LocalDateTime.now(), this.startTime.plusSeconds(this.timeReserved));
 
-		Long hours = TimeUnit.MILLISECONDS.toHours(uptime);
-		uptime -= TimeUnit.HOURS.toMillis(hours);
+		Long hours = TimeUnit.SECONDS.toHours(uptime);
+		uptime -= TimeUnit.HOURS.toSeconds(hours);
 
 		Long minutes = TimeUnit.SECONDS.toMinutes(uptime);
-		uptime -= TimeUnit.MINUTES.toMillis(minutes);
+		uptime -= TimeUnit.MINUTES.toSeconds(minutes);
 
 		Long seconds = TimeUnit.SECONDS.toSeconds(uptime);
 		return (hours < 9 ? "0" : "") + hours + ":" + (minutes < 9 ? "0" : "") + minutes + ":" + (seconds < 9 ? "0" : "") + seconds;
+	}
+
+	public static int getMoney() {
+		return money;
 	}
 
 	public static ArrayList<Dimension> getBonusVisited() {
@@ -153,5 +157,11 @@ public class Agent implements Runnable {
 
 	public static ArrayList<Dimension> getObstacleVisited() {
 		return obstacleVisited;
+	}
+
+	public void resetValeu(){
+		startLoc.width=0;
+		startLoc.height=0;
+		money = 0;
 	}
 }
