@@ -17,16 +17,12 @@ public class PartieGUI extends JFrame {
 
 
 
-    public PartieGUI(int height,int width,int timeInSeconds){
-
-        panel = new MazesPanel(height,width);
-        this.panel.player = new Agent(timeInSeconds);
+    public PartieGUI(int height, int width, int timeInSeconds, int nbrBonus, int nbrObstacle){
+        panel = new MazesPanel(height, width, timeInSeconds, nbrBonus, nbrObstacle);
         JPanelPaint();
         setTitle("MAZE GAME -LSI2021-");
 //                    p.actionDilay();
         setVisible(true);
-
-
     }
 
 

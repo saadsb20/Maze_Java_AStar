@@ -22,8 +22,8 @@ public class AbstractSearchEngine {
     protected Dimension startLoc, goalLoc, currentLoc;
     protected boolean isSearching = true;
     
-    AbstractSearchEngine(int width, int height) {
-        maze = new Maze(width, height);
+    AbstractSearchEngine(int width, int height, int nbrBonus, int nbrObstacle) {
+        maze = new Maze(width, height, nbrBonus, nbrObstacle);
         initSearch();
     }
 
