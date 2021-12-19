@@ -18,6 +18,7 @@ public class MazesPanel extends JPanel{
     JPanel contentPane ;
     Agent player;
     AstarSearchEngin currentSearchEngine = null;
+    Thread thread;
 
     public void setDisplayPath(boolean displayPath) {
         this.displayPath = displayPath;
@@ -29,6 +30,8 @@ public class MazesPanel extends JPanel{
         playerMove();
         PaintPanel();
         this.player = new Agent(timeInSeconds);
+        this.thread = new Thread(this.player);
+        this.thread.start();
         currentSearchEngine = new AstarSearchEngin(height, width, nbrBonus, nbrObstacle);
     }
 

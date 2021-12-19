@@ -147,11 +147,21 @@ public class Agent implements Runnable {
 		return (hours < 9 ? "0" : "") + hours + ":" + (minutes < 9 ? "0" : "") + minutes + ":" + (seconds < 9 ? "0" : "") + seconds;
 	}
 
+	public static int getMoney() {
+		return money;
+	}
+
 	public static ArrayList<Dimension> getBonusVisited() {
 		return bonusVisited;
 	}
 
 	public static ArrayList<Dimension> getObstacleVisited() {
 		return obstacleVisited;
+	}
+
+	public void resetValeu(){
+		startLoc.width=0;
+		startLoc.height=0;
+		money = 0;
 	}
 }

@@ -5,8 +5,10 @@ import MazeGamemaster.MainGame;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class PartieGUI extends JFrame {
     private  JPanel PanelButton = new JPanel();
@@ -56,19 +58,61 @@ public class PartieGUI extends JFrame {
         ButtonsPanel.add(B1);
         B1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               dispose();
+
+                panel.thread.stop();
+                panel.player.resetValeu();
+                dispose();
+
                 new MainGame();
             }
         });
 
+        JLabel ScorLabel = new JLabel("Score ");
+        ScorLabel.setBounds(10, 80, 145, 35);
+        ScorLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        ScorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        ButtonsPanel.add(ScorLabel);
 
-        JLabel lblNewLabel = new JLabel("Score :");
-        lblNewLabel.setBounds(23, 90, 75, 23);
-        ButtonsPanel.add(lblNewLabel);
-        JLabel lblNewLabel2 = new JLabel("Time :");
 
-        lblNewLabel2.setBounds(23, 120, 75, 23);
-        ButtonsPanel.add(lblNewLabel2);
+        JLabel TimeLabel = new JLabel("Time ");
+        TimeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        TimeLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        TimeLabel.setBounds(10, 140, 145, 35);
+        ButtonsPanel.add(TimeLabel);
+
+        JLabel scorelbl = new JLabel("Score :"+panel.player.getMoney());
+        scorelbl.setHorizontalAlignment(SwingConstants.CENTER);
+        scorelbl.setBounds(10, 100, 145, 35);
+        scorelbl.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        ButtonsPanel.add(scorelbl);
+
+        JLabel timelbl = new JLabel("Time :");
+        timelbl.setBounds(10, 160, 145, 35);
+        timelbl.setHorizontalAlignment(SwingConstants.CENTER);
+        timelbl.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        ButtonsPanel.add(timelbl);
+
+        ActionListener l1 =new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                scorelbl.setText(""+panel.player.getMoney());
+
+            }
+        };
+
+        Timer t1 = new Timer(100,l1);
+        t1.start();
+        ActionListener l2 =new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                timelbl.setText( panel.player.getCountDown());
+            }
+        };
+
+        Timer t2 = new Timer(100,l2);
+        t2.start();
 
 
 
@@ -79,8 +123,12 @@ public class PartieGUI extends JFrame {
         this.setLocationRelativeTo(null);
 
 
-    }
 
+    }
+    public void close() {
+        WindowEvent winClosingEvent = new WindowEvent( this, WindowEvent.WINDOW_CLOSING );
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent( winClosingEvent );
+    }
 
 
 

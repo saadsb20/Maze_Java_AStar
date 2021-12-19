@@ -5,12 +5,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.Font;
+import java.awt.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 
 public class LevelFrame extends JFrame {
 
@@ -58,6 +58,7 @@ public class LevelFrame extends JFrame {
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //do level1
+
                 dispose();
                 new PartieGUI(21,21, 60, 5, 5);
             }
@@ -69,6 +70,7 @@ public class LevelFrame extends JFrame {
         btnNiveau.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //do level2
+
                 dispose();
                 new PartieGUI(41,41, 90, 7, 7);
             }
@@ -80,6 +82,7 @@ public class LevelFrame extends JFrame {
         btnNiveau_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //do level3
+
                 dispose();
                 new PartieGUI(61,61, 120, 10, 10);
 
@@ -92,6 +95,7 @@ public class LevelFrame extends JFrame {
         btnNiveau_2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //do level4
+//
                 dispose();
                 new PartieGUI(81,81, 150, 15, 15);
             }
@@ -106,6 +110,10 @@ public class LevelFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
+    }
+    public void close() {
+        WindowEvent winClosingEvent = new WindowEvent( this, WindowEvent.WINDOW_CLOSING );
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent( winClosingEvent );
     }
 
 }
