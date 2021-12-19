@@ -1,6 +1,7 @@
 package MazeGamemaster.GUI;
 
 import MazeGamemaster.Entity.Agent;
+import MazeGamemaster.SaveGame;
 import MazeGamemaster.SearchAlgo.AstarSearchEngin;
 import MazeGamemaster.Entity.Maze;
 
@@ -11,8 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class MazesPanel extends JPanel{
     JPanel contentPane ;
@@ -35,6 +35,20 @@ public class MazesPanel extends JPanel{
         currentSearchEngine = new AstarSearchEngin(height, width, nbrBonus, nbrObstacle);
     }
 
+
+    /** constructeur pour la recuperation d'une partie **/
+
+    public MazesPanel(Agent agent,int height, int width, int timeInSeconds, int nbrBonus, int nbrObstacle){
+        playerMove();
+        PaintPanel();
+        this.player = new Agent(timeInSeconds);
+        this.player.bonusVisited = agent.bonusVisited;
+        this.player.obstacleVisited = agent.obstacleVisited;
+        this.player.money = agent.money;
+        this.player.startLoc = agent.startLoc;
+        currentSearchEngine = new AstarSearchEngin(height, width, nbrBonus, nbrObstacle);
+    }
+
     private void PaintPanel() {
         contentPane = new JPanel();
         this.setBorder(new TitledBorder(null, "GameGUI", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -50,6 +64,7 @@ public class MazesPanel extends JPanel{
 
         if (currentSearchEngine == null) return ;
         Maze maze = currentSearchEngine.getUpdatedMaze(player);
+        SaveGame(maze);
         int width = maze.getWidth();
         int height = maze.getHeight();
         int nbrBonus = maze.getNbrBonus();
@@ -182,6 +197,33 @@ public class MazesPanel extends JPanel{
 
 
     }
+
+
+    public void SaveGame(Maze maze){
+        try {
+            FileOutputStream fos = new FileOutputStream("./save.dat");
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+
+            SaveGame saveGame = new SaveGame();
+            saveGame.setMaze(maze);
+
+            System.out.println("saved location : " + player.startLoc);
+            System.out.println("this agent is  : " + player.getMoney());
+            saveGame.setMoney(player.getMoney());
+            saveGame.setStartLoc(player.startLoc);
+            saveGame.setBonusVisited(player.bonusVisited);
+            saveGame.setObstacleVisited(player.obstacleVisited);
+            oos.writeObject(saveGame);
+            oos.close();
+
+            System.out.println(" it has been saved");
+
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
+
 
     public Agent getPlayer() {
         return player;

@@ -16,16 +16,6 @@ public class LevelFrame extends JFrame {
 
     private JPanel contentPane;
 
-    /**
-     * Launch the application.
-     */
-//    public static void main(String[] args) {
-//
-//
-//        LevelFrame frame = new LevelFrame();
-//
-//
-//    }
 
     /**
      * Create the frame.

@@ -1,12 +1,4 @@
-package MazeGamemaster.SearchAlgo; /**
- * Title: MazeGamemaster.SearchAlgo.AbstractSearchEngine<p>
- * Description: Abstract search engine for searching paths in a maze<p>
- * Copyright: Copyright (c) Mark Watson, Released under Open Source Artistic
- * License<p>
- * Company: Mark Watson Associates<p>
- * @author Mark Watson
- * @version 1.0
- */
+package MazeGamemaster.SearchAlgo;
 
 import MazeGamemaster.Entity.Maze;
 

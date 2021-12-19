@@ -7,9 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
 
-/**
- * Class MazeGamemaster.Entity.Maze - private class for representing search space as a two-dimensional maze
- */
+
 public class Maze extends JFrame {
     public static short OBSTICLE = -1;
     public static short START_LOC_VALUE = -2;

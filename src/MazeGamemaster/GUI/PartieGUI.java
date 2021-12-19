@@ -28,8 +28,15 @@ public class PartieGUI extends JFrame {
         panel = new MazesPanel(height, width, timeInSeconds, nbrBonus, nbrObstacle);
         JPanelPaint();
         setTitle("MAZE GAME -LSI2021-");
-//                    p.actionDilay();
         setResizable(false);
+        setVisible(true);
+    }
+
+    /** constructeur pour la récupération d'une partie **/
+    public PartieGUI(Agent agent, int height, int width, int timeInSeconds, int nbrBonus, int nbrObstacle){
+        panel = new MazesPanel(agent,height, width, timeInSeconds, nbrBonus, nbrObstacle);
+        JPanelPaint();
+        setTitle("MAZE GAME -LSI2021-");
         setVisible(true);
     }
 

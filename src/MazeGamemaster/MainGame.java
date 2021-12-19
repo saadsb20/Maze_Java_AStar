@@ -1,5 +1,6 @@
 package MazeGamemaster;
 
+import MazeGamemaster.Entity.Agent;
 import MazeGamemaster.GUI.LevelFrame;
 import MazeGamemaster.GUI.PartieGUI;
 
@@ -9,34 +10,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class MainGame extends JFrame {
-
-//    public MainGame(){
-//
-//        this.setCursor(null);
-//        this.setDefaultCloseOperation(3);
-//
-//        setResizable(false);
-//    }
-//
-//    public static void main(String[] args) {
-//        MainGame m = new MainGame();
-//        JPanel jPanel1 = new JPanel();
-//        m.setTitle("MainGame");
-//        m.setContentPane(jPanel1);
-//        m.getContentPane().setLayout(null);
-//        jPanel1.setBackground(Color.white);
-//        jPanel1.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
-//        jPanel1.setDoubleBuffered(false);
-//        jPanel1.setRequestFocusEnabled(false);
-//        jPanel1.setLayout(null);
-//        m.setSize(1020, 850);
-//        m.setLocationRelativeTo(null);
-//        m.setVisible(true);
-//    }
-
-
     private JPanel contentPane;
 
     /**
@@ -126,8 +105,26 @@ public class MainGame extends JFrame {
 
         btnNewButton2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                new PartieGUI(21,21,60,5,5);
+                try{
+                    FileInputStream fis = new FileInputStream("./save.dat");
+                    BufferedInputStream bis = new BufferedInputStream(fis);
+                    ObjectInputStream ois = new ObjectInputStream(bis);
+
+                    SaveGame saveGame = (SaveGame) ois.readObject();
+                    System.out.println("tryin to restore ***********");
+                    Agent agent = null;
+                    agent.startLoc = saveGame.getStartLoc();
+                    agent.bonusVisited = saveGame.getBonusVisited();
+                    agent.obstacleVisited = saveGame.getObstacleVisited();
+                    agent.money = saveGame.getMoney();
+
+                    dispose();
+                    new PartieGUI(agent,saveGame.getMaze().getHeight(),saveGame.getMaze().getWidth(), 120, saveGame.getMaze().getNbrBonus(), saveGame.getMaze().getNbrObstacle());
+                    System.out.println(agent.startLoc);
+
+                }catch(IOException | ClassNotFoundException ex){
+                    ex.printStackTrace();
+                }
             }
         });
         btnNewButton3.addActionListener(new ActionListener() {
