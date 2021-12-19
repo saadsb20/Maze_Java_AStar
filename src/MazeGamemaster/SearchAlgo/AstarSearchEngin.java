@@ -1,8 +1,4 @@
-package MazeGamemaster.SearchAlgo;/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package MazeGamemaster.SearchAlgo;
 
 import MazeGamemaster.Entity.Agent;
 import MazeGamemaster.Entity.Maze;
@@ -11,10 +7,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-/**
- *
- * @author YOU ET-TOUIL
- */
 public class AstarSearchEngin extends AbstractSearchEngine {
     ArrayList<Dimension> L= new ArrayList<Dimension>(), T=new ArrayList<Dimension>();
     PriorityQueue<Dimension> file = new PriorityQueue<Dimension>();
@@ -29,12 +21,10 @@ public class AstarSearchEngin extends AbstractSearchEngine {
                 predecessor[i][j] = null;
         
         file.add(new Case(startLoc,0,-1.0));
-        // On suppose que T contient un seul But 
         T.add(goalLoc);
         
         doAStar();
         
-        // now calculate the shortest path from the predecessor array:
         maxDepth = 0;
         if (!isSearching) {
             searchPath[maxDepth++] = goalLoc;
@@ -46,7 +36,6 @@ public class AstarSearchEngin extends AbstractSearchEngine {
         }
     }
     
-    // On suppose que T contient un seul But (gloalLoc)
     public double h(Dimension d) {
           return Math.sqrt((goalLoc.height-d.height)*(goalLoc.height-d.height)+(goalLoc.width-d.width)*(goalLoc.width-d.width));
     }
@@ -59,7 +48,6 @@ public class AstarSearchEngin extends AbstractSearchEngine {
             
             L.add(currentLoc);           
             if(T.contains(currentLoc)){
-                 System.out.println("But trouvé : (" + currentLoc.width +", " + currentLoc.height+")");
                  isSearching = false;
                  break;
              }

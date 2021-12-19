@@ -22,8 +22,6 @@ public class PartieGUI extends JFrame {
     private JPanel ButtonsPanel = new JPanel();
     private JButton displayPathButton= new JButton("Aide ?");
 
-
-
     public PartieGUI(int height, int width, int timeInSeconds, int nbrBonus, int nbrObstacle){
         panel = new MazesPanel(height, width, timeInSeconds, nbrBonus, nbrObstacle);
         JPanelPaint();
@@ -32,15 +30,12 @@ public class PartieGUI extends JFrame {
         setVisible(true);
     }
 
-    /** constructeur pour la récupération d'une partie **/
     public PartieGUI(Agent agent, int height, int width, int timeInSeconds, int nbrBonus, int nbrObstacle){
         panel = new MazesPanel(agent,height, width, timeInSeconds, nbrBonus, nbrObstacle);
         JPanelPaint();
         setTitle("MAZE GAME -LSI2021-");
         setVisible(true);
     }
-
-
 
     private void JPanelPaint() {
 
@@ -72,11 +67,9 @@ public class PartieGUI extends JFrame {
         ButtonsPanel.add(B1);
         B1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 panel.thread.stop();
                 panel.player.resetValeu();
                 dispose();
-
                 new MainGame();
             }
         });
@@ -128,10 +121,6 @@ public class PartieGUI extends JFrame {
         Timer t2 = new Timer(100,l2);
         t2.start();
 
-
-
-
-
         contentPane.add(ButtonsPanel);
         JButton btnSave = new JButton("Enregistrer la partie");
         btnSave.setBounds(30, 711, 100, 23);
@@ -162,7 +151,6 @@ public class PartieGUI extends JFrame {
         }
 
         panel.add(enimeImage);
-
 
         JPanel joueurimg = new JPanel();
         joueurimg.setBackground(Color.white);
@@ -220,55 +208,9 @@ public class PartieGUI extends JFrame {
 
         this.setContentPane(contentPane);
         this.setLocationRelativeTo(null);
-
-
-
-
     }
     public void close() {
         WindowEvent winClosingEvent = new WindowEvent( this, WindowEvent.WINDOW_CLOSING );
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent( winClosingEvent );
     }
-
-
-
-
-   /* public static void main(String[] args) {
-
-
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-
-
-                try {
-                    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                        if ("Nimbus".equals(info.getName())) {
-                            javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-                            break;
-                        }
-                    }
-                } catch (ClassNotFoundException ex) {
-                    java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                    java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                }
-
-                try {
-                    PartieGUI p = new PartieGUI();
-                    p.setTitle("MAZE GAME -LSI-");
-//                    p.actionDilay();
-                    p.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-
-    }*/
 }

@@ -35,9 +35,6 @@ public class MazesPanel extends JPanel{
         currentSearchEngine = new AstarSearchEngin(height, width, nbrBonus, nbrObstacle);
     }
 
-
-    /** constructeur pour la recuperation d'une partie **/
-
     public MazesPanel(Agent agent,int height, int width, int timeInSeconds, int nbrBonus, int nbrObstacle){
         playerMove();
         PaintPanel();
@@ -56,8 +53,6 @@ public class MazesPanel extends JPanel{
         contentPane.add(this);
     }
 
-
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -69,7 +64,6 @@ public class MazesPanel extends JPanel{
         int height = maze.getHeight();
         int nbrBonus = maze.getNbrBonus();
         int nbrObstacle = maze.getNbrObstacle();
-        //update Chemin
         currentSearchEngine = new AstarSearchEngin(height,width, nbrBonus, nbrObstacle);
 
         int n2=width;
@@ -93,8 +87,6 @@ public class MazesPanel extends JPanel{
                 break;
         }
 
-//        System.out.println("Size of current maze: " + width + " by " + height);
-//        maze.afficherConsole();
         Graphics g1 = this.contentPane.getGraphics();
         BufferedImage image = new BufferedImage(n2+18, n2+18, BufferedImage.TYPE_INT_RGB);
         Graphics g2 = image.getGraphics();
@@ -150,7 +142,6 @@ public class MazesPanel extends JPanel{
             }
         }
 
-        // redraw the path in black:
         if(displayPath) {
             g2.setColor(Color.black);
             Dimension[] path = currentSearchEngine.getPath();
@@ -185,17 +176,13 @@ public class MazesPanel extends JPanel{
                     }
 
 
-            }else {
-                    g2.setColor(Color.GRAY);
-                    g2.fillRect(6 + x * n, 3 + y * n, n, n);
-                    }
-            }
-
+                    }else {
+                            g2.setColor(Color.GRAY);
+                            g2.fillRect(6 + x * n, 3 + y * n, n, n);
+                            }
+                }
         }
         g.drawImage(image, 20, 20, n2-51, n2-51, null);
-
-
-
     }
 
 
@@ -208,16 +195,12 @@ public class MazesPanel extends JPanel{
             SaveGame saveGame = new SaveGame();
             saveGame.setMaze(maze);
 
-            System.out.println("saved location : " + player.startLoc);
-            System.out.println("this agent is  : " + player.getMoney());
             saveGame.setMoney(player.getMoney());
             saveGame.setStartLoc(player.startLoc);
             saveGame.setBonusVisited(player.bonusVisited);
             saveGame.setObstacleVisited(player.obstacleVisited);
             oos.writeObject(saveGame);
             oos.close();
-
-            System.out.println(" it has been saved");
 
         }catch(IOException ex){
             ex.printStackTrace();
@@ -280,7 +263,5 @@ public class MazesPanel extends JPanel{
         im.put(keyStroke, name);
         am.put(name, action);
     }
-
-
 }
 
