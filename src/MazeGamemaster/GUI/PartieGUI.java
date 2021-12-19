@@ -29,6 +29,7 @@ public class PartieGUI extends JFrame {
         JPanelPaint();
         setTitle("MAZE GAME -LSI2021-");
 //                    p.actionDilay();
+        setResizable(false);
         setVisible(true);
     }
 
@@ -212,6 +213,7 @@ public class PartieGUI extends JFrame {
 
         this.setContentPane(contentPane);
         this.setLocationRelativeTo(null);
+
 
 
 

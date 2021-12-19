@@ -136,6 +136,7 @@ public class MainGame extends JFrame {
                 dispose();
             }
         });
+        this.setResizable(false);
         this.setVisible(true);
 
     }

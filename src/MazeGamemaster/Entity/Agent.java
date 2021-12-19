@@ -1,7 +1,12 @@
 package MazeGamemaster.Entity;
 
+import MazeGamemaster.MainGame;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -107,17 +112,44 @@ public class Agent implements Runnable {
 	}
 
 	public static void MazeFrame(int level, int money){
-		JPanel p3 = new JPanel(new BorderLayout());
+
 		JFrame frame2 = new JFrame();
 
-		JLabel textLabel = new JLabel("<html>Congratulations!<br>You got " + money + " coin(s)!</html>", JLabel.CENTER);
+		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame2.setBackground(Color.green);
+		frame2.getContentPane().setLayout(null);
+
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 11, 414, 167);
+		frame2.getContentPane().add(panel);
+		panel.setLayout(null);
+
+		JLabel textLabel = new JLabel("<html>Congratulations!<br>You got  coin(s)!</html>", JLabel.CENTER);
+		textLabel.setBounds(57, 29, 300, 93);
+		panel.add(textLabel);
 		textLabel.setFont(new Font("Verdana", Font.BOLD, 32));
 
-		frame2.add(p3, BorderLayout.SOUTH);
-		frame2.setBackground(Color.green);
-		frame2.add(textLabel, BorderLayout.CENTER);
+
+
+		JButton btnNewButton_1 = new JButton("Quitter");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+
+					WindowEvent winClosingEvent = new WindowEvent( frame2, WindowEvent.WINDOW_CLOSING );
+					Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent( winClosingEvent );
+
+					new MainGame();
+
+
+
+			}
+		});
+		btnNewButton_1.setBounds(181, 207, 89, 23);
+		frame2.getContentPane().add(btnNewButton_1);
+
 		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame2.setSize(900, 850);
+		frame2.setBounds(100, 100, 450, 300);
 		frame2.setLocationRelativeTo(null);
 		frame2.setVisible(true);
 	}
@@ -158,6 +190,7 @@ public class Agent implements Runnable {
 	public static ArrayList<Dimension> getObstacleVisited() {
 		return obstacleVisited;
 	}
+
 
 	public void resetValeu(){
 		startLoc.width=0;
