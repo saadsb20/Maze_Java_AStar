@@ -66,6 +66,7 @@ public class PartieGUI extends JFrame {
         lblNewLabel.setBounds(23, 90, 75, 23);
         ButtonsPanel.add(lblNewLabel);
         JLabel lblNewLabel2 = new JLabel("Time :");
+
         lblNewLabel2.setBounds(23, 120, 75, 23);
         ButtonsPanel.add(lblNewLabel2);
 
