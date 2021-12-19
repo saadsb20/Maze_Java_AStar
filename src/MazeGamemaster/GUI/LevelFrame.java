@@ -108,6 +108,7 @@ public class LevelFrame extends JFrame {
         lblNewLabel.setBounds(168, 23, 90, 25);
         panel_1.add(lblNewLabel);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setVisible(true);
 
     }
