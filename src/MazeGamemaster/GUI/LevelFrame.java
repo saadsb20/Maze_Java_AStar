@@ -16,10 +16,6 @@ public class LevelFrame extends JFrame {
 
     private JPanel contentPane;
 
-
-    /**
-     * Create the frame.
-     */
     public LevelFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -48,7 +44,6 @@ public class LevelFrame extends JFrame {
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //do level1
-
                 dispose();
                 new PartieGUI(21,21, 60, 5, 5);
             }
@@ -60,7 +55,6 @@ public class LevelFrame extends JFrame {
         btnNiveau.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //do level2
-
                 dispose();
                 new PartieGUI(41,41, 90, 7, 7);
             }
@@ -72,7 +66,6 @@ public class LevelFrame extends JFrame {
         btnNiveau_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //do level3
-
                 dispose();
                 new PartieGUI(61,61, 120, 10, 10);
 
@@ -85,7 +78,6 @@ public class LevelFrame extends JFrame {
         btnNiveau_2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //do level4
-//
                 dispose();
                 new PartieGUI(81,81, 150, 15, 15);
             }
@@ -100,12 +92,10 @@ public class LevelFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
-
     }
     public void close() {
         WindowEvent winClosingEvent = new WindowEvent( this, WindowEvent.WINDOW_CLOSING );
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent( winClosingEvent );
     }
-
 }
 

@@ -18,9 +18,6 @@ import java.io.ObjectInputStream;
 public class MainGame extends JFrame {
     private JPanel contentPane;
 
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
 
@@ -54,9 +51,6 @@ public class MainGame extends JFrame {
         });
     }
 
-    /**
-     * Create the frame.
-     */
     public MainGame() {
 
 
@@ -111,7 +105,6 @@ public class MainGame extends JFrame {
                     ObjectInputStream ois = new ObjectInputStream(bis);
 
                     SaveGame saveGame = (SaveGame) ois.readObject();
-                    System.out.println("tryin to restore ***********");
                     Agent agent = null;
                     agent.startLoc = saveGame.getStartLoc();
                     agent.bonusVisited = saveGame.getBonusVisited();
@@ -120,7 +113,6 @@ public class MainGame extends JFrame {
 
                     dispose();
                     new PartieGUI(agent,saveGame.getMaze().getHeight(),saveGame.getMaze().getWidth(), 120, saveGame.getMaze().getNbrBonus(), saveGame.getMaze().getNbrObstacle());
-                    System.out.println(agent.startLoc);
 
                 }catch(IOException | ClassNotFoundException ex){
                     ex.printStackTrace();

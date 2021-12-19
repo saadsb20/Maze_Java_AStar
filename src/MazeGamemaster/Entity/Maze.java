@@ -16,17 +16,11 @@ public class Maze extends JFrame {
     private int height ;
     private int nbrBonus ;
     private int nbrObstacle ;
-//    public Dimension startLoc = new Dimension();
     public Agent startLoc;
     public Dimension goalLoc  = new Dimension();
-    /**
-     * The maze (or search space) data is stored as a short integer rather than
-     * as a boolean so that bread-first style searches can use the array to store
-     * search depth. A value of -1 indicates a barrier in the maze.
-     */
     private final short[][] maze;
+
     public Maze(int width, int height, int nbrBonus, int nbrObstacle) {
-        System.out.println("New maze of size " + width + " by " + height);
         this.width = width;
         this.height = height;
         this.nbrBonus = nbrBonus;
@@ -44,9 +38,6 @@ public class Maze extends JFrame {
         for (int i=0; i<width+2; i++) {
             maze[i][0] = maze[i][height+1] = OBSTICLE;
         }
-        /**
-         * Randomize the maze by putting up arbitray obsticals
-         */
         File myObj = new File("./resource/LABY_"+height+"x"+width+".txt/");
         Scanner myReader = null;
         try {
@@ -63,21 +54,13 @@ public class Maze extends JFrame {
             line++;
         }
         myReader.close();
-        
-        /**
-         * Specify the starting location
-         */
 
-        /**
-         * Specify the goal location
-         */
         goalLoc.width = width - 1;
         goalLoc.height = height - 1;
         maze[width][height] = GOAL_LOC_VALUE;
 
         addBonus(nbrBonus);
         addObstacle(nbrObstacle);
-//        afficherConsole();
     }
 
 
@@ -111,14 +94,6 @@ public class Maze extends JFrame {
         }
     }
 
-//    public void afficherConsole(){
-//        for (int i = 0; i < this.maze.length; i++) {
-//            for (int j = 0; j < this.maze[0].length; j++) {
-//                System.out.print((this.maze[j][i]>=0?" " + this.maze[j][i]: this.maze[j][i]) + " ");
-//            }
-//            System.out.println();
-//        }
-//    }
     synchronized public short getValue(int x, int y) { return maze[x+1][y+1]; }
     synchronized public void setValue(int x, int y, short value) { maze[x+1][y+1] = value; repaint();}
     public int getWidth() { return width; }

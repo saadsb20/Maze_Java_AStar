@@ -13,10 +13,6 @@ import java.util.concurrent.TimeUnit;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 
-/**
- * A class that creates all the elements necessary for a player
- * to traverse the maze.
- */
 public class Agent implements Runnable {
 
     private LocalDateTime startTime;
@@ -51,7 +47,6 @@ public class Agent implements Runnable {
                 money--;
             } else maze.setValue(startLoc.width, startLoc.height, (short) -2);
         } else maze.setValue(startLoc.width, startLoc.height, (short) -2);
-        System.out.println(bonusVisited.toString() + "      " + obstacleVisited.toString());
     }
 
     public static void moveRight(Maze maze) {
@@ -67,7 +62,6 @@ public class Agent implements Runnable {
                 money--;
             } else maze.setValue(startLoc.width, startLoc.height, (short) -2);
         } else maze.setValue(startLoc.width, startLoc.height, (short) -2);
-        System.out.println(bonusVisited.toString() + "      " + obstacleVisited.toString());
     }
 
     public static void moveDown(Maze maze) {
@@ -83,7 +77,6 @@ public class Agent implements Runnable {
                 money--;
             } else maze.setValue(startLoc.width, startLoc.height, (short) -2);
         } else maze.setValue(startLoc.width, startLoc.height, (short) -2);
-        System.out.println(bonusVisited.toString() + "      " + obstacleVisited.toString());
     }
 
     public static void moveUp(Maze maze) {
@@ -101,7 +94,6 @@ public class Agent implements Runnable {
             maze.setValue(1, 1, (short) 0);
         } else maze.setValue(startLoc.width, startLoc.height, (short) -2);
         maze.setValue(1, 1, (short) 0);
-        System.out.println(bonusVisited.toString() + "      " + obstacleVisited.toString());
     }
 
     public static void endGame() {
@@ -138,36 +130,27 @@ public class Agent implements Runnable {
 			textLabel.setFont(new Font("Verdana", Font.BOLD, 32));
 		}
 
+        JButton btnNewButton_1 = new JButton("Quitter");
+        btnNewButton_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                WindowEvent winClosingEvent = new WindowEvent(frame2, WindowEvent.WINDOW_CLOSING);
+                Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+                new MainGame();
+            }
+        });
+        btnNewButton_1.setBounds(181, 207, 89, 23);
+        frame2.getContentPane().add(btnNewButton_1);
 
-            JButton btnNewButton_1 = new JButton("Quitter");
-            btnNewButton_1.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-
-
-                    WindowEvent winClosingEvent = new WindowEvent(frame2, WindowEvent.WINDOW_CLOSING);
-                    Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
-
-                    new MainGame();
-
-
-                }
-            });
-            btnNewButton_1.setBounds(181, 207, 89, 23);
-            frame2.getContentPane().add(btnNewButton_1);
-
-            frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame2.setBounds(100, 100, 450, 300);
-            frame2.setLocationRelativeTo(null);
-            frame2.setVisible(true);
-
-
+        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame2.setBounds(100, 100, 450, 300);
+        frame2.setLocationRelativeTo(null);
+        frame2.setVisible(true);
     }
 
     @Override
     public void run() {
 		boolean time = true;
         while (time) {
-            System.out.println(this.getCountDown());
             this.getCountDown();
             if (LocalDateTime.now().isAfter(this.startTime.plusSeconds(this.timeReserved))) {
             	timeout = true;
@@ -202,7 +185,6 @@ public class Agent implements Runnable {
     public static ArrayList<Dimension> getObstacleVisited() {
         return obstacleVisited;
     }
-
 
     public void resetValeu() {
         startLoc.width = 0;

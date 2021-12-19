@@ -22,10 +22,7 @@ public class AbstractSearchEngine {
     public Maze getMaze() {
         return maze;
     }
-    /**
-     * We will use the Java type Dimension (fields width and height will encode
-     * the coordinates in x and y directions) for the search path:
-     */
+
     protected void initSearch() {
         if (searchPath == null) {
             searchPath = new Dimension[1000];
@@ -52,7 +49,7 @@ public class AbstractSearchEngine {
         }
         return ret;
     }
-//les moves possible d'un demension 
+
     protected Dimension[] getPossibleMoves(Dimension loc) {
         Dimension tempMoves[] = new Dimension[8];
         for (int i = 0; i < tempMoves.length; i++) {
